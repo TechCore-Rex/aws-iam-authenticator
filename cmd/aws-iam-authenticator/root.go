@@ -69,8 +69,6 @@ func init() {
 
 	featureGates.Add(config.DefaultFeatureGates)
 	featureGates.AddFlag(rootCmd.PersistentFlags())
-
-	viper.BindPFlag("feature-gates", rootCmd.PersistentFlags().Lookup("feature-gates"))
 }
 
 func initConfig() {
@@ -111,14 +109,6 @@ func getConfig() (config.Config, error) {
 	}
 	if err := viper.UnmarshalKey("server.mapAccounts", &cfg.AutoMappedAWSAccounts); err != nil {
 		logrus.WithError(err).Fatal("invalid server account mappings")
-	}
-
-	if featureGates.Enabled(config.SSORoleMatch) {
-		logrus.Info("SSORoleMatch feature enabled")
-		config.SSORoleMatchEnabled = true
-	}
-	if featureGates.Enabled(config.ConfiguredInitDirectories) {
-		logrus.Info("ConfiguredInitDirectories feature enabled")
 	}
 
 	if cfg.ClusterID == "" {
