@@ -1,4 +1,4 @@
-module github.com/dearing/aws-iam-authenticator
+module github.com/TechCore-Rex/aws-iam-authenticator
 
 go 1.16
 
